@@ -95,7 +95,7 @@ class HomeController extends Controller {
 	        'swap' => $swap,
 	        'swap_total' => $swap_total,
 	        'swap_used' => $swap_used
-    	));
+    	);
 
 		return view('default')->with($data);
 
