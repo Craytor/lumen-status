@@ -1,0 +1,109 @@
+html {
+    height: 100%;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+body {
+    font-family: "Segoe UI Light",'HelveticaNeue-UltraLight','Helvetica Neue UltraLight','Helvetica Neue',"Open Sans","Segoe UI","Tahoma","Verdana","Arial",sans-serif;
+    font-weight: 300;
+}
+
+#wrapper {
+    position: relative;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 100%;
+
+    background: #222;
+    background-size: cover;
+
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+
+
+
+
+
+h1, p {
+    padding-left: 15%;
+}
+h1 {
+    color: #fff;
+    font-weight: 100;
+    font-size: 4em;
+    margin: 0;
+    padding-top: 22.25%;
+}
+p {
+    color: #ccc;
+    font-size: 2em;
+    margin: 0;
+}
+footer {
+    font-family: "Segoe UI",'Helvetica Neue',"Open Sans","Tahoma","Verdana","Arial",sans-serif;
+    margin: 0;
+    line-height: 40px;
+    position: absolute;
+    bottom: 2em;
+    color: #ccc;
+    width: 100%;
+}
+
+
+/* Yes, this is a hack. */
+footer canvas {
+    vertical-align: middle;
+}
+footer canvas + input {
+    margin-top: 16px !important;
+    font-size: 12px !important;
+}
+
+
+button {
+    color: #ccc;
+    background-color: transparent;
+    font-family: "Segoe UI",'Helvetica Neue',"Open Sans","Tahoma","Verdana","Arial",sans-serif;
+    line-height: 40px;
+
+}
+button:hover,
+button.active {
+    background-color: transparent;
+}
+button:focus {
+    outline: none;
+}
+
+footer .left {
+    float:left;
+    text-align: left;
+    padding-left: 15%;
+}
+
+footer .right {
+    padding-right: 15%;
+    float:right;
+    text-align: right;
+}
+
+footer .left {
+    float:left;
+    text-align: left;
+    padding-left: 15%;
+}
+
+footer .right {
+    padding-right: 15%;
+    float:right;
+    text-align: right;
+}
