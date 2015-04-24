@@ -1,14 +1,14 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{{ env('server_hostname', 'Server Hostname') }}</title>
+        <title>{{ env('LS__SERVER_NAME', 'Server Name') }}</title>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="js/jqknob.js"></script>
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/style.css" />
         <style>
             #wrapper {
-                background-image: url(" {{ env('server_background', 'http://shots.tjyouschak.me/1dQE') }}");
+                background-image: url(" {{ env('LS__server_background', 'http://shots.tjyouschak.me/1dQE') }} ");
             }
         </style>
         <script>
@@ -50,8 +50,8 @@
     <body>
         <div class="menu push-menu-bottom">
             <div class="left">
-                <h2>{{ env('server_hostname', 'Server Hostname') }}</h2>
-                {{ env('server_ip', 'Server IP') }}
+                <h2>{{ env('LS__SERVER_NAME', 'Server Name') }}</h2>
+                IP Will go here
 
             </div>
             <div class="right">
@@ -68,8 +68,8 @@
             </div>
         </div><!-- /push menu bottom -->
         <div id="wrapper">
-            <h1>{{ env('server_hostname', 'Server Hostname') }}</h1>
-            <p>{{ env('server_ip', 'Server IP') }}</p>
+            <h1>{{ env('LS__SERVER_NAME', 'Server Name') }}</h1>
+            <p>{{ env('LS__SERVER_DESCRIPTION', 'Description') }}</p>
             <footer>
                 <div class="left">
                     @if(!empty($uptime))
