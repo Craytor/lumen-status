@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="css/style.css" />
         <style>
             #wrapper {
-                background-image: url("http://shots.tjyouschak.me/pV9w");
+                background-image: url(" {{ env('server_background', 'http://shots.tjyouschak.me/1dQE') }}");
             }
         </style>
         <script>
