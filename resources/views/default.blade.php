@@ -13,7 +13,7 @@
         </style>
         <script>
             function update() {
-                $.post('<?php echo basename(__FILE__); ?>/data', function(data) {
+                $.get('data', function(data) {
                     // Update footer
                     $('#uptime').text(data.uptime);
                     $('#k-cpu').val(data.cpu).trigger("change");
@@ -56,7 +56,7 @@
             </div>
             <div class="right">
                 <b>Disk:</b> <span id="dt-disk-used">{{ round($disk_used / 1048576, 2) }}</span> GB / {{ round($disk_total / 1048576, 2) }} GB<br>
-                <b>Memory:</b> <span id="dt-mem-used">{{ round($mem_used) }}</span> MB / {{ (512 * round(round($mem_total) / 512)) }} MB<br>
+                <b>Memory:</b> <span id="dt-mem-used">{{ round($memory_used) }}</span> MB / {{ (512 * round(round($memory_used) / 512)) }} MB<br>
 
                 @if($swap_total !== "0")
                     <b>Swap:</b> <span id="dt-swap-used">{{ $swap_used }}</span> MB / {{ $swap_total }} MB<br>

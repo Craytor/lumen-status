@@ -97,13 +97,51 @@ class HomeController extends Controller {
 	        'swap_used' => $swap_used
     	);
 
-		return view('default')->with($data);
+		return view('default', $data);
 
 	}
 
 	public function data()
 	{
-		$num_cpus = 1;
+		$initial_uptime = shell_exec("cut -d. -f1 /proc/uptime");
+	    $days = floor($initial_uptime / 60 / 60 / 24);
+	    $hours = $initial_uptime / 60 / 60 % 24;
+	    $mins = $initial_uptime / 60 % 60;
+	    $secs = $initial_uptime % 60;
+	    if($days > "0") {
+	        $uptime = $days . "d " . $hours . "h";
+	    } elseif ($days == "0" && $hours > "0") {
+	        $uptime = $hours . "h " . $mins . "m";
+	    } elseif ($hours == "0" && $mins > "0") {
+	        $uptime = $mins . "m " . $secs . "s";
+	    } elseif ($mins < "0") {
+	        $uptime = $secs . "s";
+	    } else {
+	        $uptime = "Error retreving uptime.";
+	    }
+	    // Check disk stats
+	    $disk_result = `df -P | grep /dev/$`;
+	    if(!trim($disk_result)) {
+	        $disk_result = `df -P | grep /$`;
+	    }
+	    $disk_result = explode(" ", preg_replace("/\s+/", " ", $disk_result));
+	    $disk_total = intval($disk_result[1]);
+	    $disk_used = intval($disk_result[2]);
+	    $disk = intval(rtrim($disk_result[4], "%"));
+	    // Check current RAM usage
+	    $mem_result = trim(`free -mo | grep Mem`);
+	    $mem_result = explode(" ", preg_replace("/\s+/", " ", $mem_result));
+	    $mem_total = intval($mem_result[1]);
+	    $mem_used = $mem_result[2] - $mem_result[5] - $mem_result[6];
+	    $memory = round($mem_used / $mem_total * 100);
+	    // Check current swap usage
+	    $swap_result = trim(`free -mo | grep Swap`);
+	    $swap_result = explode(" ", preg_replace("/\s+/", " ", $swap_result));
+	    $swap_total = $swap_result[1];
+	    $swap_used = $swap_result[2];
+	    $swap = round($swap_used / $swap_total * 100);
+
+	    $num_cpus = 1;
 	    if (is_file('/proc/cpuinfo')) {
 	        $cpuinfo = file_get_contents('/proc/cpuinfo');
 	        preg_match_all('/^processor/m', $cpuinfo, $matches);
@@ -138,10 +176,22 @@ class HomeController extends Controller {
             $cpu = 0;
         }
 
-
         $data = array(
-        		'uptime'
-        	);
+	        'uptime' => $uptime,
+	        'disk' => $disk,
+	        'disk_total' => $disk_total,
+	        'disk_used' => $disk_used,
+	        'cpu' => $cpu,
+	        'num_cpus' => $num_cpus,
+	        'memory' => $memory,
+	        'memory_total' => $mem_total,
+	        'memory_used' => $mem_used,
+	        'swap' => $swap,
+	        'swap_total' => $swap_total,
+	        'swap_used' => $swap_used
+    	);
+
+    	return response($data);
 
 	}
 
