@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller {
 
+	// Holy crap these functions needs some extreme organizing and reusability
+
 	public function index()
 	{
 		
@@ -25,6 +27,8 @@ class HomeController extends Controller {
 	    } else {
 	        $uptime = "Error retreving uptime.";
 	    }
+
+
 	    // Check disk stats
 	    $disk_result = `df -P | grep /dev/$`;
 	    if(!trim($disk_result)) {
@@ -34,12 +38,16 @@ class HomeController extends Controller {
 	    $disk_total = intval($disk_result[1]);
 	    $disk_used = intval($disk_result[2]);
 	    $disk = intval(rtrim($disk_result[4], "%"));
+
+
 	    // Check current RAM usage
 	    $mem_result = trim(`free -mo | grep Mem`);
 	    $mem_result = explode(" ", preg_replace("/\s+/", " ", $mem_result));
 	    $mem_total = intval($mem_result[1]);
 	    $mem_used = $mem_result[2] - $mem_result[5] - $mem_result[6];
 	    $memory = round($mem_used / $mem_total * 100);
+
+
 	    // Check current swap usage
 	    $swap_result = trim(`free -mo | grep Swap`);
 	    $swap_result = explode(" ", preg_replace("/\s+/", " ", $swap_result));
@@ -119,6 +127,8 @@ class HomeController extends Controller {
 	    } else {
 	        $uptime = "Error retreving uptime.";
 	    }
+
+
 	    // Check disk stats
 	    $disk_result = `df -P | grep /dev/$`;
 	    if(!trim($disk_result)) {
@@ -128,12 +138,16 @@ class HomeController extends Controller {
 	    $disk_total = intval($disk_result[1]);
 	    $disk_used = intval($disk_result[2]);
 	    $disk = intval(rtrim($disk_result[4], "%"));
+
+
 	    // Check current RAM usage
 	    $mem_result = trim(`free -mo | grep Mem`);
 	    $mem_result = explode(" ", preg_replace("/\s+/", " ", $mem_result));
 	    $mem_total = intval($mem_result[1]);
 	    $mem_used = $mem_result[2] - $mem_result[5] - $mem_result[6];
 	    $memory = round($mem_used / $mem_total * 100);
+
+
 	    // Check current swap usage
 	    $swap_result = trim(`free -mo | grep Swap`);
 	    $swap_result = explode(" ", preg_replace("/\s+/", " ", $swap_result));
