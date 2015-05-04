@@ -8,6 +8,11 @@ class HomeController extends Controller {
 
 	// Holy crap these functions needs some extreme organizing and reusability
 
+	public function __construct()
+	{
+		// move data here
+	}
+
 	public function index()
 	{
 		
