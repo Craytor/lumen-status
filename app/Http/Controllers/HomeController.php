@@ -10,25 +10,13 @@ class HomeController extends Controller {
 
 	public function __construct()
 	{
-		// move data here
+		$this->uptime_initial = shell_exec("cut -d. -f1 /proc/uptime");
+
 	}
 
 	public function index()
 	{
 		
-		$initial_uptime = shell_exec("cut -d. -f1 /proc/uptime");
-	    $days = floor($initial_uptime / 60 / 60 / 24);
-	    $hours = $initial_uptime / 60 / 60 % 24;
-	    $mins = $initial_uptime / 60 % 60;
-	    $secs = $initial_uptime % 60;
-	    if($days > "0") {
-	        $uptime = $days . "d " . $hours . "h";
-	    } elseif ($days == "0" && $hours > "0") {
-	        $uptime = $hours . "h " . $mins . "m";
-	    } elseif ($hours == "0" && $mins > "0") {
-	        $uptime = $mins . "m " . $secs . "s";
-	    } elseif ($mins < "0") {
-	        $uptime = $secs . "s";
 	    } else {
 	        $uptime = "Error retreving uptime.";
 	    }
@@ -116,19 +104,6 @@ class HomeController extends Controller {
 
 	public function data()
 	{
-		$initial_uptime = shell_exec("cut -d. -f1 /proc/uptime");
-	    $days = floor($initial_uptime / 60 / 60 / 24);
-	    $hours = $initial_uptime / 60 / 60 % 24;
-	    $mins = $initial_uptime / 60 % 60;
-	    $secs = $initial_uptime % 60;
-	    if($days > "0") {
-	        $uptime = $days . "d " . $hours . "h";
-	    } elseif ($days == "0" && $hours > "0") {
-	        $uptime = $hours . "h " . $mins . "m";
-	    } elseif ($hours == "0" && $mins > "0") {
-	        $uptime = $mins . "m " . $secs . "s";
-	    } elseif ($mins < "0") {
-	        $uptime = $secs . "s";
 	    } else {
 	        $uptime = "Error retreving uptime.";
 	    }
