@@ -11,12 +11,32 @@ class HomeController extends Controller {
 	public function __construct()
 	{
 		$this->uptime_initial = shell_exec("cut -d. -f1 /proc/uptime");
+		$this->uptime_days = floor($this->uptime_initial / 60 / 60 / 24);
+		$this->uptime_hours = $this->uptime_initial / 60 / 60 % 24;
+		$this->uptime_mins = $this->uptime_initial / 60 % 60;
+		$this->uptime_secs = $this->uptime_initial % 60;
+
+		$this->mem_data = explode(" ", preg_replace("/\s+/", " ", trim(`free -mo | grep Mem`)));
+		$this->mem_total = intval($this->mem_data[1]);
+		$this->mem_used = $this->mem_data[2] - $this->mem_data[5] - $this->mem_data[6];
+
+		$this->swap_data = explode(" ", preg_replace("/\s+/", " ", trim(`free -mo | grep Swap`)));
+		$this->swap_total = $this->swap_data[1];
+		$this->swap_used = $this->swap_data[2];
 
 	}
 
 	public function index()
 	{
 		
+	    if($this->uptime_days > "0") {
+	        $uptime = $this->uptime_days . "d " . $this->uptime_hours . "h";
+	    } elseif ($this->uptime_days == "0" && $this->uptime_hours > "0") {
+	        $uptime = $this->uptime_hours . "h " . $this->uptime_mins . "m";
+	    } elseif ($this->uptime_hours == "0" && $this->uptime_mins > "0") {
+	        $uptime = $this->uptime_mins . "m " . $this->uptime_secs . "s";
+	    } elseif ($this->uptime_mins < "0") {
+	        $uptime = $this->uptime_secs . "s";
 	    } else {
 	        $uptime = "Error retreving uptime.";
 	    }
@@ -33,20 +53,11 @@ class HomeController extends Controller {
 	    $disk = intval(rtrim($disk_result[4], "%"));
 
 
-	    // Check current RAM usage
-	    $mem_result = trim(`free -mo | grep Mem`);
-	    $mem_result = explode(" ", preg_replace("/\s+/", " ", $mem_result));
-	    $mem_total = intval($mem_result[1]);
-	    $mem_used = $mem_result[2] - $mem_result[5] - $mem_result[6];
-	    $memory = round($mem_used / $mem_total * 100);
+
+	    $memory = round($this->mem_used / $this->mem_total * 100);
+	    $swap = round($this->swap_used / $this->swap_total * 100);
 
 
-	    // Check current swap usage
-	    $swap_result = trim(`free -mo | grep Swap`);
-	    $swap_result = explode(" ", preg_replace("/\s+/", " ", $swap_result));
-	    $swap_total = $swap_result[1];
-	    $swap_used = $swap_result[2];
-	    $swap = round($swap_used / $swap_total * 100);
 
 	    $num_cpus = 1;
 	    if (is_file('/proc/cpuinfo')) {
@@ -91,11 +102,11 @@ class HomeController extends Controller {
 	        'cpu' => $cpu,
 	        'num_cpus' => $num_cpus,
 	        'memory' => $memory,
-	        'memory_total' => $mem_total,
-	        'memory_used' => $mem_used,
+	        'memory_total' => $this->mem_total,
+	        'memory_used' => $this->mem_used,
 	        'swap' => $swap,
-	        'swap_total' => $swap_total,
-	        'swap_used' => $swap_used
+	        'swap_total' => $this->swap_total,
+	        'swap_used' => $this->swap_used
     	);
 
 		return view('default', $data);
@@ -104,6 +115,14 @@ class HomeController extends Controller {
 
 	public function data()
 	{
+		if($this->uptime_days > "0") {
+	        $uptime = $this->uptime_days . "d " . $this->uptime_hours . "h";
+	    } elseif ($this->uptime_days == "0" && $this->uptime_hours > "0") {
+	        $uptime = $this->uptime_hours . "h " . $this->uptime_mins . "m";
+	    } elseif ($this->uptime_hours == "0" && $this->uptime_mins > "0") {
+	        $uptime = $this->uptime_mins . "m " . $this->uptime_secs . "s";
+	    } elseif ($this->uptime_mins < "0") {
+	        $uptime = $this->uptime_secs . "s";
 	    } else {
 	        $uptime = "Error retreving uptime.";
 	    }
@@ -120,20 +139,9 @@ class HomeController extends Controller {
 	    $disk = intval(rtrim($disk_result[4], "%"));
 
 
-	    // Check current RAM usage
-	    $mem_result = trim(`free -mo | grep Mem`);
-	    $mem_result = explode(" ", preg_replace("/\s+/", " ", $mem_result));
-	    $mem_total = intval($mem_result[1]);
-	    $mem_used = $mem_result[2] - $mem_result[5] - $mem_result[6];
-	    $memory = round($mem_used / $mem_total * 100);
+	    $memory = round($this->mem_used / $this->mem_total * 100);
+	    $swap = round($this->swap_used / $this->swap_total * 100);
 
-
-	    // Check current swap usage
-	    $swap_result = trim(`free -mo | grep Swap`);
-	    $swap_result = explode(" ", preg_replace("/\s+/", " ", $swap_result));
-	    $swap_total = $swap_result[1];
-	    $swap_used = $swap_result[2];
-	    $swap = round($swap_used / $swap_total * 100);
 
 	    $num_cpus = 1;
 	    if (is_file('/proc/cpuinfo')) {
@@ -178,11 +186,11 @@ class HomeController extends Controller {
 	        'cpu' => $cpu,
 	        'num_cpus' => $num_cpus,
 	        'memory' => $memory,
-	        'memory_total' => $mem_total,
-	        'memory_used' => $mem_used,
+	        'memory_total' => $this->mem_total,
+	        'memory_used' => $this->mem_used,
 	        'swap' => $swap,
-	        'swap_total' => $swap_total,
-	        'swap_used' => $swap_used
+	        'swap_total' => $this->swap_total,
+	        'swap_used' => $this->swap_used
     	);
 
     	return response($data);
