@@ -24,6 +24,9 @@ class HomeController extends Controller {
 		$this->swap_total = $this->swap_data[1];
 		$this->swap_used = $this->swap_data[2];
 
+		$this->memory = 0;
+		$this->swap = 0;
+
 	}
 
 	public function index()
@@ -53,16 +56,12 @@ class HomeController extends Controller {
 	    $disk = intval(rtrim($disk_result[4], "%"));
 
 	    if($this->mem_used !== "0" || $this->mem_total !== "0") {
-	    	$memory = round($this->mem_used / $this->mem_total * 100);
-		} else {
-			$memory = 0;
+	    	$this->memory = round($this->mem_used / $this->mem_total * 100);
 		}
 
 		
 		if($this->swap_used !== "0" || $this->swap_total !== "0") {
-	    	$swap = round($this->swap_used / $this->swap_total * 100);
-		} else {
-			$swap = 0;
+	    	$this->swap = round($this->swap_used / $this->swap_total * 100);
 		}
 
 
@@ -109,10 +108,10 @@ class HomeController extends Controller {
 	        'disk_used' => $disk_used,
 	        'cpu' => $cpu,
 	        'num_cpus' => $num_cpus,
-	        'memory' => $memory,
+	        'memory' => $this->memory,
 	        'memory_total' => $this->mem_total,
 	        'memory_used' => $this->mem_used,
-	        'swap' => $swap,
+	        'swap' => $this->swap,
 	        'swap_total' => $this->swap_total,
 	        'swap_used' => $this->swap_used
     	);
@@ -149,16 +148,12 @@ class HomeController extends Controller {
 
 	    
 	    if($this->mem_used !== "0" || $this->mem_total !== "0") {
-	    	$memory = round($this->mem_used / $this->mem_total * 100);
-		} else {
-			$memory = 0;
+	    	$this->memory = round($this->mem_used / $this->mem_total * 100);
 		}
 
 		
 		if($this->swap_used !== "0" || $this->swap_total !== "0") {
-	    	$swap = round($this->swap_used / $this->swap_total * 100);
-		} else {
-			$swap = 0;
+	    	$this->swap = round($this->swap_used / $this->swap_total * 100);
 		}
 
 
@@ -204,10 +199,10 @@ class HomeController extends Controller {
 	        'disk_used' => $disk_used,
 	        'cpu' => $cpu,
 	        'num_cpus' => $num_cpus,
-	        'memory' => $memory,
+	        'memory' => $this->memory,
 	        'memory_total' => $this->mem_total,
 	        'memory_used' => $this->mem_used,
-	        'swap' => $swap,
+	        'swap' => $this->swap,
 	        'swap_total' => $this->swap_total,
 	        'swap_used' => $this->swap_used
     	);
