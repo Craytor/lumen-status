@@ -52,14 +52,17 @@ class HomeController extends Controller {
 	    $disk_used = intval($disk_result[2]);
 	    $disk = intval(rtrim($disk_result[4], "%"));
 
-	    $memory = 0;
-	    if($this->mem_used == "0" || $this->mem_total == "0") {
+	    if($this->mem_used !== "0" || $this->mem_total !== "0") {
 	    	$memory = round($this->mem_used / $this->mem_total * 100);
+		} else {
+			$memory = 0;
 		}
 
-		$swap = 0;
-		if($this->swap_used == "0" || $this->swap_total == "0") {
+		
+		if($this->swap_used !== "0" || $this->swap_total !== "0") {
 	    	$swap = round($this->swap_used / $this->swap_total * 100);
+		} else {
+			$swap = 0;
 		}
 
 
