@@ -15,13 +15,11 @@ I wanted to explore Lumen! Lumen was released just a few days before I started m
 
 ## Configuration
 You can configure the following data in your .env file, also note that you may need to copy the .env.example to .env
-
 ```
 LS__SERVER_NAME=
 LS__SERVER_DESCRIPTION=
 LS__TEXT_COLOR=
 LS__SERVER_BACKGROUND=
-
 ```
  (`LS__SERVER_NAME`) is the server name, (`LS__SERVER_DESCRIPTION`) is the server description, (`LS__TEXT_COLOR`) is the text color, and (`LS__SERVER_BACKGROUND`) is the server background. I've decided to make it configurable by these means because you wont have to configure the app at all. It's "plug and play" - and it works on Forge too! Go to the environmental variable area on Forge, and you can add the keys above and the values you want. Also, make sure to press the box that says this application uses Laravel 4.2+!
 
