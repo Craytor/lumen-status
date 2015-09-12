@@ -11,7 +11,7 @@ Lumen Status was created by, and is maintained by [Tyler Youschak](http://tjyous
 * ... and more
 
 ## Why Lumen?
-I wanted to explore Lumen! Lumen was released just a few days before I started making this app - and I will continue updating this app to keep it in good condtions.
+I wanted to explore Lumen! Lumen was released just a few days before I started making this app - and I will continue updating this app to keep it in good conditions.
 
 ## Configuration
 You can configure the following data in your .env file, also note that you may need to copy the .env.example to .env
