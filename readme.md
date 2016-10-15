@@ -1,30 +1,21 @@
-lumen-status
-============
-Lumen Status was created by, and is maintained by [Tyler Youschak](http://tjyouschak.me). Lumen status doens't have an official name, but it is just a landing page for your server. You can see an example of the page [on my server](http://cosmos.team-radiant.com/)! The landing page includes the following:
-* Server Name
-* Server Description
-* Server Background
-* Disk Usage
-* Memory
-* Swap
-* CPU
-* ... and more
+# Lumen PHP Framework
 
-## Why Lumen?
-I wanted to explore Lumen! Lumen was released just a few days before I started making this app - and I will continue updating this app to keep it in good conditions.
+[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
+[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
+[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
 
-## Configuration
-You can configure the following data in your .env file, also note that you may need to copy the .env.example to .env
-```
-LS__SERVER_NAME=
-LS__SERVER_DESCRIPTION=
-LS__TEXT_COLOR=
-LS__SERVER_BACKGROUND=
-```
- (`LS__SERVER_NAME`) is the server name, (`LS__SERVER_DESCRIPTION`) is the server description, (`LS__TEXT_COLOR`) is the text color, and (`LS__SERVER_BACKGROUND`) is the server background. I've decided to make it configurable by these means because you wont have to configure the app at all. It's "plug and play" - and it works on Forge too! Go to the environmental variable area on Forge, and you can add the keys above and the values you want. Also, make sure to press the box that says this application uses Laravel 4.2+ so that you can use these variables.
+Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
 
-## Requirements
-In order to use lumen-status, you must have `sysstat` installed on your system. You can get `sysstat` by running `sudo apt-get install sysstat`.
+## Official Documentation
 
-## Contributing
-Do you want to contribute to this amazing project? If so, make your changes and make a pull request.
+Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+
+## License
+
+The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

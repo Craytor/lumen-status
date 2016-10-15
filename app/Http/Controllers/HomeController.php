@@ -1,8 +1,6 @@
-<?php 
+<?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
 
 class HomeController extends Controller {
 
@@ -31,7 +29,7 @@ class HomeController extends Controller {
 
 	public function index()
 	{
-		
+
 	    if($this->uptime_days > "0") {
 	        $uptime = $this->uptime_days . "d " . $this->uptime_hours . "h";
 	    } elseif ($this->uptime_days == "0" && $this->uptime_hours > "0") {
@@ -59,7 +57,7 @@ class HomeController extends Controller {
 	    	$this->memory = round($this->mem_used / $this->mem_total * 100);
 		}
 
-		
+
 		if($this->swap_used !== "0" || $this->swap_total !== "0") {
 	    	$this->swap = round($this->swap_used / $this->swap_total * 100);
 		}
@@ -146,12 +144,12 @@ class HomeController extends Controller {
 	    $disk = intval(rtrim($disk_result[4], "%"));
 
 
-	    
+
 	    if($this->mem_used !== "0" || $this->mem_total !== "0") {
 	    	$this->memory = round($this->mem_used / $this->mem_total * 100);
 		}
 
-		
+
 		if($this->swap_used !== "0" || $this->swap_total !== "0") {
 	    	$this->swap = round($this->swap_used / $this->swap_total * 100);
 		}
